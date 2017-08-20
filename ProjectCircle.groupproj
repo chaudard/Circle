@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{88FCFA75-2DB0-4373-96F4-AD22CE77B731}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Circle.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Test\CircleTests.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="Circle">
+			<MSBuild Projects="Circle.dproj"/>
+		</Target>
+		<Target Name="Circle:Clean">
+			<MSBuild Targets="Clean" Projects="Circle.dproj"/>
+		</Target>
+		<Target Name="Circle:Make">
+			<MSBuild Targets="Make" Projects="Circle.dproj"/>
+		</Target>
+		<Target Name="CircleTests">
+			<MSBuild Projects="Test\CircleTests.dproj"/>
+		</Target>
+		<Target Name="CircleTests:Clean">
+			<MSBuild Targets="Clean" Projects="Test\CircleTests.dproj"/>
+		</Target>
+		<Target Name="CircleTests:Make">
+			<MSBuild Targets="Make" Projects="Test\CircleTests.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="Circle;CircleTests"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="Circle:Clean;CircleTests:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="Circle:Make;CircleTests:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
